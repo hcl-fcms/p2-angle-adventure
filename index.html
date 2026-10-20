@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f4e9">
+  <title>角角探險隊｜小二數學</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">∠</span><span>角角探險隊<small>小二數學 · 角和垂直線</small></span></div>
+      <button id="restart" class="text-button" type="button" hidden>重新開始</button>
+    </header>
+
+    <main id="intro" class="intro">
+      <div class="intro-copy">
+        <span class="eyebrow">精靈島修復任務</span>
+        <h1>用你的眼睛、雙手和理由，找回消失的角。</h1>
+        <p>森林的門、橋和城堡都歪了。你要找頂點、用直角工具比較、畫出角，才能逐一修好。</p>
+        <div class="intro-actions"><button id="start" class="primary-button" type="button">出發探險 <span aria-hidden="true">↗</span></button><span>約 30–35 分鐘 · 不用登入</span></div>
+      </div>
+      <svg class="intro-art" viewBox="0 0 520 380" role="img" aria-label="精靈島上的森林、橋和城堡">
+        <path d="M0 313Q132 252 260 305T520 292V380H0Z" fill="#d7e8c0"/>
+        <path d="M0 340Q134 314 240 348T520 325V380H0Z" fill="#a9cf9c"/>
+        <path d="M0 355Q160 322 310 352T520 334V380H0Z" fill="#6c9b82"/>
+        <path d="M62 304V187M62 188L8 266H116Z" fill="#407a65" stroke="#31594a" stroke-width="8" stroke-linejoin="round"/>
+        <path d="M132 310V215M132 216L91 271H173Z" fill="#4e8d70" stroke="#31594a" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M302 316V143h52v173M300 174h-20v-46h28v22h13M353 169h19v-46h28v47h-19v147" fill="#f6c89f" stroke="#aa725e" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M295 141h62M374 137h29M326 316v-47q0-25 25-25t25 25v47" fill="none" stroke="#aa725e" stroke-width="7"/>
+        <path d="M185 309l32-72 33 72M214 238l33 72" fill="none" stroke="#865f4b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="452" cy="85" r="39" fill="#f7d883"/><path d="M436 85h32M452 69v32" stroke="#a77636" stroke-width="5" stroke-linecap="round"/>
+        <path d="M190 100q32-50 65 0-38 41-65 0" fill="#e8a992"/><circle cx="222" cy="84" r="4" fill="#523e39"/>
+        <path d="M178 106q-28 4-27 29 26-5 39-19M246 106q28 4 27 29-26-5-39-19" fill="#f5d7a4"/>
+        <circle cx="185" cy="98" r="4" fill="#f8f4e9"/>
+      </svg>
+      <div class="intro-note">先想一想：<strong>角的大小，看哪裏？</strong></div>
+    </main>
+
+    <main id="game" class="game" hidden>
+      <div class="quest-head">
+        <div><span id="stage-name" class="eyebrow"></span><h1 id="task-title"></h1><p id="task-instruction"></p></div>
+        <div class="quest-count"><span id="task-count"></span><div class="progress-track"><div id="progress-fill"></div></div></div>
+      </div>
+      <div class="game-grid">
+        <section class="canvas-card" aria-label="互動圖形區">
+          <div class="canvas-heading"><span id="scene-label">角角工作台</span><span id="scene-hint"></span></div>
+          <svg id="board" viewBox="0 0 600 390" role="img" aria-label="數學角度互動圖" tabindex="0"></svg>
+          <div id="draw-controls" class="draw-controls" hidden>
+            <p id="draw-help">拖動橙色圓點來畫第二條邊。</p>
+            <div class="draw-buttons"><button id="check-drawing" class="secondary-button" type="button">檢查我的圖</button><button id="reset-drawing" class="text-button" type="button">重新畫</button></div>
+          </div>
+        </section>
+        <aside class="answer-card">
+          <div class="guide-character" aria-hidden="true"><span>✦</span><div>角角精靈</div></div>
+          <p id="guide-text" class="guide-text"></p>
+          <div id="options" class="options"></div>
+          <button id="tool-button" class="tool-button" type="button" hidden>顯示直角工具</button>
+          <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+          <button id="next" class="primary-button next-button" type="button" hidden>繼續探險 <span aria-hidden="true">→</span></button>
+        </aside>
+      </div>
+      <div class="map-strip" aria-label="冒險進度"><span>森林入口</span><span>直角工具屋</span><span>角角門</span><span>修橋工程</span><span>城堡試煉</span></div>
+    </main>
+
+    <main id="finish" class="finish" hidden>
+      <span class="finish-star" aria-hidden="true">✦</span>
+      <span class="eyebrow">精靈島修好了</span>
+      <h1>你完成角角探險！</h1>
+      <p>角的大小看開口，不看邊長；兩條線相交成直角，就互相垂直。</p>
+      <div class="evidence-card"><h2>給老師看的探險成果</h2><ul id="evidence-list"></ul><div id="drawings-gallery" class="drawings-gallery"></div><p>請向老師展示你畫的角，並親口說出判斷理由。ClassDojo 分數由老師核實後發放。</p></div>
+      <button id="play-again" class="secondary-button" type="button">再玩一次</button>
+    </main>
+  </div>
+</body>
+</html>
